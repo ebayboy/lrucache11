@@ -1,17 +1,8 @@
 
 CC := g++
 
-SOURCE := SampleMain.cpp
-
-# $(patsubst 原模式， 目标模式， 文件列表)
-# $(patsubst %.c,%.o,$(dir) )中，patsubst 把$(dir)中的变量符合后缀是.c的全部替换成.o
-# 匹配的部分替换，其他部分不变
-
-OBJS   := $(patsubst %.c,%.o, $(patsubst %.cpp,%.o, $(patsubst %cc,%o, $(SOURCE)) ))
-#$(warning "OBJS1:"$(OBJS))
-
-#g++ -std=c++17 -O3 -o test_static test_smartfilter.cpp ../build/lib/libsmartfilter.a -I ../build/include/ ../lib/libhs.a 
-TARGET	:= SampleMain
+TARGET	:= SampleMain LRUCache11Test 
+#VectorKeyTest
 
 DEFINES :=
 LIBS	:= -L.
@@ -48,31 +39,18 @@ endif
 
 CXXFLAGS:= -DHAVE_CONFIG_H $(CFLAGS) $(DEFINES) $(INCLUDE)
 
-.PHONY : everything objs clean veryclean rebuild
-
-everything : $(TARGET)
+.PHONY : clean all 
 
 all : $(TARGET)
-
-objs : $(OBJS)
-
-rebuild: veryclean everything
 
 clean:
 	rm -fr $(TARGET) $(OBJS)
 
-veryclean : clean
-	rm -rf *.so *.gcno *.gcda
+SampleMain	:  SampleMain.cpp
+	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-%.o:%.c
-	$(CC) $(CFLAGS) $< $(INCLUDE) -o $@
+LRUCache11Test : LRUCache11Test.cpp
+	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
 
-%.o:%.cc
-	$(CC) $(CFLAGS) $< $(INCLUDE) -o $@
-
-%.o:%.cpp
-	$(CC) $(CFLAGS) $< $(INCLUDE) -o $@
-
-$(TARGET) : $(OBJS)
-	$(CC) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
-
+VectorKeyTest : VectorKeyTest.cpp
+	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)

@@ -8,7 +8,7 @@ DEFINES :=
 LIBS	:= -L.
 INCLUDE := -I.
 LDFLAGS := -lpthread
-CFLAGS	:= -c -std=c++17 -Wall
+CFLAGS	:= -std=c++17 -Wall
 
 ############## add self define  ######################
 
@@ -47,10 +47,10 @@ clean:
 	rm -fr $(TARGET) $(OBJS)
 
 SampleMain	:  SampleMain.cpp
-	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CXXFLAGS) $($LDFLAGS)
 
 LRUCache11Test : LRUCache11Test.cpp
-	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)
 
 VectorKeyTest : VectorKeyTest.cpp
-	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
+	$(CC) -o $@ $^ $(CXXFLAGS) $(LDFLAGS)

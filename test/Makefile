@@ -6,7 +6,7 @@ TARGET	:= SampleMain LRUCache11Test
 
 DEFINES :=
 LIBS	:= -L.
-INCLUDE := -I.
+INCLUDE := -I../include
 LDFLAGS := -lpthread
 CFLAGS	:= -std=c++17 -Wall
 
